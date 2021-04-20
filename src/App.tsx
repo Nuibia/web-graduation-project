@@ -1,4 +1,3 @@
-import { Layout } from "antd";
 import React, { FC, useEffect, useState } from "react";
 import "antd/dist/antd.css";
 import Routers from "./router";
@@ -6,6 +5,7 @@ import Sider from "antd/lib/layout/Sider";
 import styled from "styled-components";
 import { SliderMenu } from "./components/SiderMenu";
 import PAGES from "./router/pages";
+import { LayoutContainer } from "./components/antd-override";
 export const SiderContainer = styled(Sider)`
   overflow: auto;
   height: 100%;
@@ -20,24 +20,24 @@ export const SiderContainer = styled(Sider)`
 `;
 const App: FC = () => {
   const pathname = window.location.pathname;
-  const [isSHowSider, setIsSHowSider] = useState(true);
+  const [isShowSider, setIsShowSider] = useState(true);
   useEffect(() => {
     if (pathname === PAGES.login) {
-      setIsSHowSider(false);
+      setIsShowSider(false);
     }
   }, [pathname]);
   return (
-    <Layout>
-      {isSHowSider && (
+    <LayoutContainer>
+      {isShowSider && (
         <SiderContainer>
           <div className="logo" />
           <SliderMenu />
         </SiderContainer>
       )}
-      <Layout style={{ marginLeft: 200 }}>
+      <LayoutContainer isShowSider={isShowSider}>
       <Routers />
-      </Layout>
-    </Layout>
+      </LayoutContainer>
+    </LayoutContainer>
   );
 };
 

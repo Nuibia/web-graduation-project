@@ -1,6 +1,5 @@
-import { Layout } from "antd";
+import { Header } from "antd/lib/layout/layout";
 import React, { FC } from "react";
-const { Header } = Layout;
 
 interface CommonLayoutProps {
   isShowHeader?: boolean;
