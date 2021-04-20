@@ -12,7 +12,7 @@ export const CommonLayout: FC<CommonLayoutProps> = ({
 }) => {
   return (
     <>
-      {isShowHeader && <Header />}
+      {isShowHeader && <Header/>}
       {children}
     </>
   );
