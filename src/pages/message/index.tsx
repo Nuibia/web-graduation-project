@@ -1,14 +1,13 @@
-import React from 'react'
-import { CommonLayout } from '../../components/CommonLayout';
+import React from "react";
+import { CommonLayout } from "../../components/CommonLayout";
+import { Editor } from "./components/editor";
 
 const Message = () => {
-    return (
-        <CommonLayout>
-        <div>
-            信息
-        </div>
-        </CommonLayout>
-    )
-}
+  return (
+    <CommonLayout>
+      <Editor placeholder="请输入内容..." />
+    </CommonLayout>
+  );
+};
 
 export default Message;
