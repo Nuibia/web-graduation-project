@@ -1,11 +1,10 @@
 import React from "react";
 import { CommonLayout } from "../../components/CommonLayout";
-import { Editor } from "../../components/editor";
 
 const Message = () => {
   return (
     <CommonLayout>
-      <Editor placeholder="请输入内容..." />
+      信息查看后端
     </CommonLayout>
   );
 };
