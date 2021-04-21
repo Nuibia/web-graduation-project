@@ -14,8 +14,9 @@ interface findmessageRequest {
   authorid?: number;
   id?: number;
 }
-interface messageResponse {
-  Data: any;
+interface delmessageRequest {
+  id: number;
+  guid: string;
 }
 /**
  * 信息添加
@@ -28,6 +29,18 @@ export const messageAdd = async (params: messageAddRequest) =>
  * @param params 信息查看
  */
 export const findmessage = async (params: findmessageRequest) =>
-  axios.get<messageResponse>(`${BASE_URL}api/MessageInfo/GetMessageInfo`, {
+  axios.get(`${BASE_URL}api/MessageInfo/GetMessageInfo`, {
     params,
   });
+/**
+ * 信息修改
+ */
+export const editmessage = async (params: messageAddRequest) => {
+  axios.post(`${BASE_URL}api/MessageInfo/UpdateMessageInfo`, params);
+};
+
+/**
+ * 信息删除
+ */
+export const delmessage = async (params: delmessageRequest) =>
+  axios.post(`${BASE_URL}api/MessageInfo/DelMessageInfo`, params);

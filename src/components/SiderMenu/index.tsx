@@ -15,12 +15,6 @@ export const SliderMenu = () => {
       case PAGES.messageadd:
         setSelectedKeys(MenuType.信息添加);
         break;
-      case PAGES.messageedit:
-        setSelectedKeys(MenuType.信息修改);
-        break;
-      case PAGES.messagedetail:
-        setSelectedKeys(MenuType.信息详情);
-        break;
       case PAGES.messageshow:
         setSelectedKeys(MenuType.信息展示);
         break;
@@ -44,15 +38,6 @@ export const SliderMenu = () => {
       case MenuType.信息:
         history.push(PAGES.message);
         break;
-      case MenuType.信息添加:
-        history.push(PAGES.messageadd);
-        break;
-      case MenuType.信息修改:
-        history.push(PAGES.messageedit);
-        break;
-      case MenuType.信息详情:
-        history.push(PAGES.messagedetail);
-        break;
       case MenuType.信息展示:
         history.push(PAGES.messageshow);
         break;
@@ -74,12 +59,9 @@ export const SliderMenu = () => {
       selectedKeys={[(selectedKeys as unknown) as string]}
       onSelect={handleSelect}
     >
-      <Menu.Item key={MenuType.信息}>信息</Menu.Item>
-      <Menu.Item key={MenuType.信息添加}>信息添加</Menu.Item>
-      <Menu.Item key={MenuType.信息修改}>信息修改</Menu.Item>
-      <Menu.Item key={MenuType.信息详情}>信息详情</Menu.Item>
+      <Menu.Item key={MenuType.信息}>信息操作</Menu.Item>
       <Menu.Item key={MenuType.信息展示}>信息展示</Menu.Item>
-      <Menu.Item key={MenuType.用户}>用户</Menu.Item>
+      <Menu.Item key={MenuType.用户}>用户操作</Menu.Item>
       <Menu.Item key={MenuType.数据大屏}>数据大屏</Menu.Item>
       <Menu.Item key={MenuType.数据分析}>数据分析</Menu.Item>
     </Menu>

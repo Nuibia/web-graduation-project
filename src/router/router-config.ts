@@ -17,11 +17,11 @@ const routerConfig = [
         component:lazy(()=>import(/*webpackChunkName:"messageadd"*/'../pages/messageadd')),
     },
     {
-        path:PAGES.messageedit,
+        path:`${PAGES.messageedit}/:id`,
         component:lazy(()=>import(/*webpackChunkName:"messageedit"*/'../pages/messageedit')),
     },
     {
-        path:PAGES.messagedetail,
+        path:`${PAGES.messagedetail}/:id`,
         component:lazy(()=>import(/*webpackChunkName:"messagmessagedetaileadd"*/'../pages/messagedetail')),
     },
     {
