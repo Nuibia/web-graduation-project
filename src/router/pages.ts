@@ -3,7 +3,7 @@ const PAGES = {
     //信息页面 后台
     message:'/message',
     //信息展示前台展示
-    messageshow:'/message/list',
+    messageshow:'/message/show',
     //信息添加
     messageadd:'/message/add',
     //信息修改

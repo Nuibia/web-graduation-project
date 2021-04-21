@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { FC } from 'react'
+import { CommonLayout } from '../../components/CommonLayout';
+import { DescriptionList } from './descriptionlist';
 
-const MessageShow = () => {
+const MessageShow:FC = () => {
+
     return (
-        <div>
-            前台展示
-        </div>
+       <CommonLayout>
+           <DescriptionList/>
+       </CommonLayout>
     )
 }
 

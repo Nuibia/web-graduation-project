@@ -1,10 +1,9 @@
 import React from 'react'
+import { CommonLayout } from '../../components/CommonLayout'
 
 const MessageDetail = () => {
     return (
-        <div>
-            信息详情
-        </div>
+        <CommonLayout>信息详情</CommonLayout>
     )
 }
 
