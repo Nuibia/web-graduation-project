@@ -1,5 +1,6 @@
 import dayjs from "dayjs";
 import React, { FC, useEffect, useState } from "react";
+import PAGES from "../../../router/pages";
 import { findmessage } from "../../../service/message";
 import { ContainerWrapper, ListWrapper } from "./styled";
 
@@ -14,7 +15,7 @@ export const DescriptionList: FC = () => {
         data.forEach((element) => {
           list.push(
             <ListWrapper>
-              <a className="bg">
+              <a className="bg" href={`${PAGES.messagedetail}/${element.id}`}>
               <div className="contentleft">
                 <div className="first">
                   <div className="author">作者：{element.userInfo.username}</div>
