@@ -1,6 +1,6 @@
 import React from "react";
 import { CommonLayout } from "../../components/CommonLayout";
-import { Editor } from "./components/editor";
+import { Editor } from "../../components/editor";
 
 const Message = () => {
   return (

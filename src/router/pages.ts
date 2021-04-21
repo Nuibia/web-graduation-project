@@ -1,7 +1,15 @@
 //页面地址
 const PAGES = {
-    //信息页面
+    //信息页面 后台
     message:'/message',
+    //信息展示前台展示
+    messageshow:'/message/list',
+    //信息添加
+    messageadd:'/message/add',
+    //信息修改
+    messageedit:'/message/edit',
+    //信息详情
+    messagedetail:'/message/detail',
     //数据大屏
     bigScreen:'/big-screen',
     //数据分析

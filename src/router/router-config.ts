@@ -9,6 +9,22 @@ const routerConfig = [
         component:lazy(()=>import(/*webpackChunkName:"message"*/'../pages/message')),
     },
     {
+        path:PAGES.messageshow,
+        component:lazy(()=>import(/*webpackChunkName:"messageshow"*/'../pages/messageshow')),
+    },
+    {
+        path:PAGES.messageadd,
+        component:lazy(()=>import(/*webpackChunkName:"messageadd"*/'../pages/messageadd')),
+    },
+    {
+        path:PAGES.messageedit,
+        component:lazy(()=>import(/*webpackChunkName:"messageedit"*/'../pages/messageedit')),
+    },
+    {
+        path:PAGES.messagedetail,
+        component:lazy(()=>import(/*webpackChunkName:"messagmessagedetaileadd"*/'../pages/messagedetail')),
+    },
+    {
         path:PAGES.bigScreen,
         component:lazy(()=>import(/*webpackChunkName:"big-screen"*/'../pages/big-screen')),
     },
