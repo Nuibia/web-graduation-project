@@ -4,6 +4,7 @@ import { useParams } from "react-router";
 import { CommonLayout } from "../../components/CommonLayout";
 import { findmessage } from "../../service/message";
 import { ArticleWrapper, CommentWrapper, ContentWrapper } from "./styled";
+import Comment from './components/comment';
 
 const MessageDetail = () => {
   const { id } = useParams<{ id }>();
@@ -43,8 +44,8 @@ const MessageDetail = () => {
         <div className="content" dangerouslySetInnerHTML={{__html:content}}></div>
       </ArticleWrapper>
       <CommentWrapper>
-        <div className="add">添加评论</div>
-        <div className="list">评论列表</div>
+      <CommentWrapper/>
+      <Comment/>
       </CommentWrapper>
       </ContentWrapper>
     </CommonLayout>

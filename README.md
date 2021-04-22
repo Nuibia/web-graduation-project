@@ -7,6 +7,7 @@
 >4. mobx
 >5. bizcharts
 >6. Braft Editor
+>7.Ant Design
 ## 实现功能：
 >1. 用户登陆
 >2. 用户注册
