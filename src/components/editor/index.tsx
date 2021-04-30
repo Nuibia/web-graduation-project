@@ -78,6 +78,7 @@ export const Editor: FC<EditorProps> = ({ placeholder, id }) => {
   };
   return (
     <DivWrapper>
+      <div className="content">
       <div className="title">
         <span className="subtitle">标题：</span>
         <Input
@@ -97,6 +98,7 @@ export const Editor: FC<EditorProps> = ({ placeholder, id }) => {
         <Button type="primary" onClick={handleSubmit}>
           提交
         </Button>
+      </div>
       </div>
     </DivWrapper>
   );
