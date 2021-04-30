@@ -16,7 +16,7 @@ const Login: FC = () => {
     const data = res?.data;
     if(data?.Status===0){
       dataStore.setUserInfo({guid:data.guid, userCount:value.usercount});
-      history.push(PAGES.messageadd);
+      history.push(PAGES.bigScreen);
     }else{
       message.error('登陆失败');
     }
