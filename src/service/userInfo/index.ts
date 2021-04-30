@@ -9,7 +9,7 @@ interface role {
 }
 interface findUserInfoProps extends pagitation {
   roleid?: number;
-  username?: number;
+  usercount?: string;
 }
 interface delUserInfoProps extends role {
   id: number;

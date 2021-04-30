@@ -49,10 +49,8 @@ export const Editor: FC<EditorProps> = ({ placeholder, id }) => {
         content: editorState.toHTML(),
         updatetime: new Date().toString(),
         likecount: likecount,
-        //TODO:等待登陆功能
-        authorid: 6,
-        //TODO:等待登陆功能
-        guid: "1d634463-4fe2-4929-ab4c-f8f8a28903a6",
+        authorid: dataStore.userId,
+        guid: dataStore.guid,
       };
       const res = await messageAdd(param);
       console.log(res.data.Data);
