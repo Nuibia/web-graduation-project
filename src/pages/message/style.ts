@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const TableWrapper = styled.div`
+  overflow: auto;
   padding: 8px;
   height: 100%;
   background-color: #fff;

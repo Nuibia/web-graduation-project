@@ -5,10 +5,10 @@ import BraftEditor from "braft-editor";
 // 引入编辑器样式
 import "braft-editor/dist/index.css";
 import { Button, Input, message } from "antd";
-import { findmessage, messageAdd } from "../../service/message";
+import { editmessage, findmessage, messageAdd } from "../../service/message";
 import { useHistory } from "react-router";
 import PAGES from "../../router/pages";
-import Store from '../../store';
+import Store from "../../store";
 interface EditorProps {
   placeholder?: string;
   id?: number;
@@ -16,7 +16,6 @@ interface EditorProps {
 //复用，可以是添加，或者修改，通过params来判断
 export const Editor: FC<EditorProps> = ({ placeholder, id }) => {
   const dataStore = Store;
-  console.log('dataStore',dataStore);
   const [editorState, setEditorState] = useState(null);
   const [inputValue, setInputValue] = useState();
   const [likecount, setLikecount] = useState(0);
@@ -52,17 +51,29 @@ export const Editor: FC<EditorProps> = ({ placeholder, id }) => {
         authorid: dataStore.userId,
         guid: dataStore.guid,
       };
-      const res = await messageAdd(param);
-      console.log(res.data.Data);
-      if(res.data.Data){
-        message.success('操作成功');
-        history.push(PAGES.message);
-      }else{
-        message.error('操作失败');
-        history.push(PAGES.message);
+      let res;
+      if (id) {
+        res = await editmessage({ id, ...param });
+        //TODO:修改有问题
+      } else {
+        res = await messageAdd(param);
       }
-    }else{
-      message.warn('内容不能为空');
+      if (res && res?.data?.Status === 0) {
+        message.success("操作成功");
+        history.push(PAGES.message);
+      } else {
+        if (res?.data?.Status === 3) {
+          message.error("登陆超时，请重新登陆",1);
+          setTimeout(()=>{ 
+            history.push(PAGES.login);
+          },1000)          
+        } else {
+          message.error("操作失败");
+          history.push(PAGES.message);
+        }
+      }
+    } else {
+      message.warn("内容不能为空");
     }
   };
   return (

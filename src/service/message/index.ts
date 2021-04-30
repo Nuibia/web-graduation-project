@@ -1,5 +1,9 @@
 import axios from "axios";
 import { BASE_URL } from "../../constant";
+axios.interceptors.request.use(config => {
+  config.withCredentials = true;
+  return config;
+});
 export interface messageAddRequest {
   title: string;
   content: string;
@@ -7,6 +11,9 @@ export interface messageAddRequest {
   likecount: number;
   authorid: number;
   guid: string;
+}
+export interface editMessageRequest extends messageAddRequest{
+  id:number;
 }
 interface findmessageRequest {
   pageSize: number;
@@ -35,7 +42,7 @@ export const findmessage = async (params: findmessageRequest) =>
 /**
  * 信息修改
  */
-export const editmessage = async (params: messageAddRequest) => {
+export const editmessage = async (params: editMessageRequest) => {
   axios.post(`${BASE_URL}api/MessageInfo/UpdateMessageInfo`, params);
 };
 

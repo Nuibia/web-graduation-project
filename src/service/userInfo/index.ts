@@ -1,5 +1,9 @@
 import axios from "axios";
 import { BASE_URL } from "../../constant";
+axios.interceptors.request.use(config => {
+  config.withCredentials = true;
+  return config;
+});
 interface pagitation {
   pageSize: number;
   pageNum: number;

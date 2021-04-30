@@ -1,4 +1,4 @@
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, message } from "antd";
 import React, { FC } from "react";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { login } from "../../service/login";
@@ -14,9 +14,11 @@ const Login: FC = () => {
   const onFinish = async (value: any) => {
     const res = await login(value);
     const data = res?.data;
-    if(data){
+    if(data?.Status===0){
       dataStore.setUserInfo({guid:data.guid, userCount:value.usercount});
       history.push(PAGES.messageadd);
+    }else{
+      message.error('登陆失败');
     }
   };
   return (

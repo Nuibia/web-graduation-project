@@ -13,7 +13,6 @@ const Message = () => {
   useEffect(() => {
     const fetchData = async () => {
       const res = await findmessage({ pageSize: 10, pageNum: 1 });
-      console.log(res);
       if (res) {
         setDataSource(res.data.Data);
       }
