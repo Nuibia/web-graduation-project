@@ -4,11 +4,21 @@ import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { login } from "../../service/login";
 import { FormContainerWrapper, FormWrapper, SpanWrapper } from "./style";
 import { CommonLayout } from "../../components/CommonLayout";
-const onFinish = async (value: any) => {
-  const res = await login(value);
-  console.log(res);
-};
+import Store from '../../store';
+import PAGES from "../../router/pages";
+import { useHistory } from "react-router";
+
 const Login: FC = () => {
+  const dataStore = Store;
+  const history = useHistory();
+  const onFinish = async (value: any) => {
+    const res = await login(value);
+    const data = res?.data;
+    if(data){
+      dataStore.setUserInfo({guid:data.guid, userCount:value.usercount});
+      history.push(PAGES.messageadd);
+    }
+  };
   return (
     <CommonLayout isShowHeader={false}>
       <SpanWrapper>疫情数据后台管理系统登陆</SpanWrapper>

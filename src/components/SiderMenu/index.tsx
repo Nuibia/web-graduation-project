@@ -1,10 +1,11 @@
 import { Menu } from "antd";
 import React, { useEffect, useState } from "react";
-import { history } from "../../router/history";
+import { useHistory } from "react-router";
 import PAGES from "../../router/pages";
 import { MenuType } from "../../types/SiderMenu.ts";
 
 export const SliderMenu = () => {
+  const history = useHistory();
   const [selectedKeys, setSelectedKeys] = useState(MenuType.信息);
   let pathname = window.location.pathname;
   useEffect(() => {

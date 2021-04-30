@@ -8,12 +8,15 @@ import { Button, Input, message } from "antd";
 import { findmessage, messageAdd } from "../../service/message";
 import { useHistory } from "react-router";
 import PAGES from "../../router/pages";
+import Store from '../../store';
 interface EditorProps {
   placeholder?: string;
   id?: number;
 }
 //复用，可以是添加，或者修改，通过params来判断
 export const Editor: FC<EditorProps> = ({ placeholder, id }) => {
+  const dataStore = Store;
+  console.log('dataStore',dataStore);
   const [editorState, setEditorState] = useState(null);
   const [inputValue, setInputValue] = useState();
   const [likecount, setLikecount] = useState(0);
