@@ -9,6 +9,7 @@ import { editmessage, findmessage, messageAdd } from "../../service/message";
 import { useHistory } from "react-router";
 import PAGES from "../../router/pages";
 import Store from "../../store";
+import dayjs from "dayjs";
 interface EditorProps {
   placeholder?: string;
   id?: number;
@@ -46,7 +47,7 @@ export const Editor: FC<EditorProps> = ({ placeholder, id }) => {
       const param = {
         title: inputValue,
         content: editorState.toHTML(),
-        updatetime: new Date().toString(),
+        updatetime: dayjs(new Date()).format("YYYY-MM-DD HH:mm:ss"),
         likecount: likecount,
         authorid: dataStore.userId,
         guid: dataStore.guid,
@@ -54,15 +55,15 @@ export const Editor: FC<EditorProps> = ({ placeholder, id }) => {
       let res;
       if (id) {
         res = await editmessage({ id, ...param });
-        //TODO:修改有问题
       } else {
         res = await messageAdd(param);
       }
-      if (res && res?.data?.Status === 0) {
+      const data =res?.data;
+      if (data?.Status === 0) {
         message.success("操作成功");
         history.push(PAGES.message);
       } else {
-        if (res?.data?.Status === 3) {
+        if (data?.Status === 3) {
           message.error("登陆超时，请重新登陆",1);
           setTimeout(()=>{ 
             history.push(PAGES.login);

@@ -32,6 +32,12 @@ const UserInfo = () => {
       title: "权限",
       dataIndex: "roleid",
       key: "roleid",
+      render: (text, record) => (
+        <>
+          {text === 0 && <span>管理员</span>}
+          {text === 1 && <span>用户</span>}
+        </>
+      ),
     },
     {
       title: "操作",
@@ -51,7 +57,7 @@ const UserInfo = () => {
     form.setFieldsValue({
       id: record.id,
       username: record.username,
-      userpwd: record.pwd,
+      userpwd: record.userpwd,
       usercount: record.usercount,
       roleid: record.roleid,
     });

@@ -6,28 +6,39 @@ import { ButtonWrapper, TableWrapper } from "./style";
 import dayjs from "dayjs";
 import PAGES from "../../router/pages";
 import { useHistory } from "react-router";
+import store from "../../store";
 
 const Message = () => {
   const history = useHistory();
   const [dataSource, setDataSource] = useState([]);
+  const fetchData = async () => {
+    const res = await findmessage({ pageSize: 10, pageNum: 1 });
+    if (res) {
+      setDataSource(res.data.Data);
+    }
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      const res = await findmessage({ pageSize: 10, pageNum: 1 });
-      if (res) {
-        setDataSource(res.data.Data);
-      }
-    };
     fetchData();
   }, []);
   const handleEdit = (record) => {
     history.push(`${PAGES.messageedit}/${record.id}`);
   };
-  const handleDel =async (record) => {
-    const res =await delmessage({id:record.id,guid:''});
-    if(res?.data?.Data){
-      message.success('删除成功');
-    }else{
-      message.error('操作失败,请联系管理员');
+  const dataStore = store;
+  const handleDel = async (record) => {
+    const res = await delmessage({ id: record.id, guid: dataStore.guid });
+    const data = res?.data;
+    if (data.Status === 0) {
+      message.success("删除成功");
+      fetchData();
+    } else {
+      if (data.Status === 3) {
+        message.error("登陆超时，请重新登陆", 1);
+        setTimeout(() => {
+          history.push(PAGES.login);
+        }, 1000);
+      } else {
+        message.error("操作失败,请联系管理员");
+      }
     }
   };
   const handleAdd = () => {
@@ -79,7 +90,11 @@ const Message = () => {
         </Button>
       </ButtonWrapper>
       <TableWrapper>
-        <Table columns={columns} dataSource={dataSource} showSorterTooltip={false}/>
+        <Table
+          columns={columns}
+          dataSource={dataSource}
+          showSorterTooltip={false}
+        />
       </TableWrapper>
     </CommonLayout>
   );

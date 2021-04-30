@@ -16,17 +16,21 @@ export const DescriptionList: FC = () => {
           list.push(
             <ListWrapper>
               <a className="bg" href={`${PAGES.messagedetail}/${element.id}`}>
-              <div className="contentleft">
-                <div className="first">
-                  <div className="author">作者：{element.userInfo.username}</div>
-                  <div className="time">更新时间：{dayjs(element.updatetime).format('YYYY-MM-DD') }</div>
+                <div className="contentleft">
+                  <div className="first">
+                    <div className="author">
+                      作者：{element.userInfo.username}
+                    </div>
+                    <div className="time">
+                      更新时间：{dayjs(element.updatetime).format("YYYY-MM-DD")}
+                    </div>
+                  </div>
+                  <div className="title">标题：{element.title}</div>
+                  <div className="content">内容：{element.content}</div>
+                  <div className="likecount">点赞数：{element.likecount}</div>
                 </div>
-                <div className="title">标题：{element.title}</div>
-                <div className="content">内容：{element.content}</div>
-                <div className="likecount">点赞数：{element.likecount}</div>
-              </div>
-              {/* <div className="img">图片</div> */}
-            </a>
+                {/* <div className="img">图片</div> */}
+              </a>
             </ListWrapper>
           );
         });

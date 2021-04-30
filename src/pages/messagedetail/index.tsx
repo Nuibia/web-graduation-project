@@ -4,7 +4,8 @@ import { useParams } from "react-router";
 import { CommonLayout } from "../../components/CommonLayout";
 import { findmessage } from "../../service/message";
 import { ArticleWrapper, CommentWrapper, ContentWrapper } from "./styled";
-import Comment from './components/comment';
+import Comment from "./components/comment";
+import store from "../../store";
 
 const MessageDetail = () => {
   const { id } = useParams<{ id }>();
@@ -13,6 +14,8 @@ const MessageDetail = () => {
   const [content, setContent] = useState(undefined);
   const [updateTime, setUpdateTime] = useState(undefined);
   const [likecount, setLikeCount] = useState(undefined);
+  const dataStore = store;
+  console.log('dataStore',dataStore)
   useEffect(() => {
     if (id) {
       const fetchData = async () => {
@@ -24,29 +27,35 @@ const MessageDetail = () => {
           setUpdateTime(data[0].updatetime);
           setLikeCount(data[0].likecount);
         }
-        console.log(res);
       };
       fetchData();
     }
   }, [id]);
   return (
     <CommonLayout isShowHeader={false}>
-    <ContentWrapper>
-      <ArticleWrapper>
-        <div className="title">{title}</div>
-        <div className="subtitle">
-          <div className="author">江鸟</div>
-          <div className="updatetime">
-            {dayjs(updateTime).format("YYYY-MM-DD")}
+      <ContentWrapper>
+        <ArticleWrapper>
+          <div className="title">{title}</div>
+          <div className="subtitle">
+            <div className="author">江鸟</div>
+            <div className="updatetime">
+              {dayjs(updateTime).format("YYYY-MM-DD")}
+            </div>
           </div>
-        </div>
-        <div className="likecount">点赞数：{likecount}</div>
-        <div className="content" dangerouslySetInnerHTML={{__html:content}}></div>
-      </ArticleWrapper>
-      <CommentWrapper>
-      <CommentWrapper/>
-      <Comment/>
-      </CommentWrapper>
+          <div className="likecount">点赞数：{likecount}</div>
+          <div
+            className="content"
+            dangerouslySetInnerHTML={{ __html: content }}
+          ></div>
+        </ArticleWrapper>
+        <CommentWrapper>
+          <CommentWrapper />
+          <Comment
+            articleid={id}
+            userId={dataStore.userId}
+            guid={dataStore.guid}
+          />
+        </CommentWrapper>
       </ContentWrapper>
     </CommonLayout>
   );
