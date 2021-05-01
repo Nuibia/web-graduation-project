@@ -42,9 +42,9 @@ export const findmessage = async (params: findmessageRequest) =>
 /**
  * 信息修改
  */
-export const editmessage = async (params: editMessageRequest) => {
+export const editmessage = async (params: editMessageRequest) => 
   axios.post(`${BASE_URL}api/MessageInfo/UpdateMessageInfo`, params);
-};
+;
 
 /**
  * 信息删除
