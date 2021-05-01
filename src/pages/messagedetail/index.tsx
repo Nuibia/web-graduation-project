@@ -4,8 +4,7 @@ import { useParams } from "react-router";
 import { CommonLayout } from "../../components/CommonLayout";
 import { findmessage } from "../../service/message";
 import { ArticleWrapper, CommentWrapper, ContentWrapper } from "./styled";
-import Comment from "./components/comment";
-import store from "../../store";
+import { Comment } from "./components/comment";
 
 const MessageDetail = () => {
   const { id } = useParams<{ id }>();
@@ -14,8 +13,6 @@ const MessageDetail = () => {
   const [content, setContent] = useState(undefined);
   const [updateTime, setUpdateTime] = useState(undefined);
   const [likecount, setLikeCount] = useState(undefined);
-  const dataStore = store;
-  console.log('dataStore',dataStore)
   useEffect(() => {
     if (id) {
       const fetchData = async () => {
@@ -39,7 +36,7 @@ const MessageDetail = () => {
           <div className="subtitle">
             <div className="author">江鸟</div>
             <div className="updatetime">
-              {dayjs(updateTime).format("YYYY-MM-DD")}
+              {dayjs(updateTime).format("YYYY-MM-DD HH:mm:ss")}
             </div>
           </div>
           <div className="likecount">点赞数：{likecount}</div>
@@ -50,11 +47,7 @@ const MessageDetail = () => {
         </ArticleWrapper>
         <CommentWrapper>
           <CommentWrapper />
-          <Comment
-            articleid={id}
-            userId={dataStore.userId}
-            guid={dataStore.guid}
-          />
+          <Comment articleid={id} />
         </CommentWrapper>
       </ContentWrapper>
     </CommonLayout>

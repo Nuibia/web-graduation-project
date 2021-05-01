@@ -22,7 +22,7 @@ export const DescriptionList: FC = () => {
                       作者：{element.userInfo.username}
                     </div>
                     <div className="time">
-                      更新时间：{dayjs(element.updatetime).format("YYYY-MM-DD")}
+                      更新时间：{dayjs(element.updatetime).format("YYYY-MM-DD HH:mm:ss")}
                     </div>
                   </div>
                   <div className="title">标题：{element.title}</div>

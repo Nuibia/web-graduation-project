@@ -54,7 +54,7 @@ const Message = () => {
       dataIndex: "updatetime",
       sorter: (a, b) => a.updatetime - b.updatetime,
       render: (text) => (
-        <span>{dayjs(text).format("YYYY-MM-DD hh:mm:ss")}</span>
+        <span>{dayjs(text).format("YYYY-MM-DD HH:mm:ss")}</span>
       ),
     },
     {

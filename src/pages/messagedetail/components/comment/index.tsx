@@ -9,10 +9,15 @@ import {
 } from "antd";
 import TextArea from "antd/lib/input/TextArea";
 import dayjs from "dayjs";
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import PAGES from "../../../../router/pages";
-import { commentadd, commentaddProps } from "../../../../service/comment";
+import {
+  commentadd,
+  commentaddProps,
+  findcomment,
+} from "../../../../service/comment";
+import store from "../../../../store";
 import { ContentWrapper } from "./styled";
 
 const CommentList = ({ comments }) => (
@@ -42,10 +47,33 @@ const Editor = ({ onChange, onSubmit, submitting, value }) => (
 );
 interface CommentWrapperProps {
   articleid?: number;
-  userId:number;
-  guid:string;
 }
-const Comment: FC<CommentWrapperProps> = ({ articleid, userId, guid }) => {
+export const Comment: FC<CommentWrapperProps> = ({ articleid }) => {
+  const fetchData = async () => {
+    const res = await findcomment({
+      pageNum: 1,
+      pageSize: 999,
+      messageid: articleid,
+    });
+    const data = res?.data;
+    if (data) {
+      let cmdList = [];
+      (data?.Data || []).forEach((element) => {
+        cmdList.push({
+          author: "",
+          avatar:
+            "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
+          content: element.content,
+          datetime: dayjs(element.updatetime).format("YYYY-MM-DD HH:mm:ss"),
+        });
+      });
+      setComments(cmdList);
+    }
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
+  const dataStore = store;
   const history = useHistory();
   const [comments, setComments] = useState([]);
   const [submitting, setSubmitting] = useState(false);
@@ -61,26 +89,16 @@ const Comment: FC<CommentWrapperProps> = ({ articleid, userId, guid }) => {
       content: value,
       updatetime: dayjs(new Date()).format("YYYY-MM-DD HH:mm:ss"),
       messageid: articleid,
-      authorid: userId,
-      guid: guid,
+      authorid: dataStore.userId,
+      guid: dataStore.guid,
     };
     const res = await commentadd(param);
     const data = res?.data;
     if (data.Status === 0) {
-      //执行成功
+      message.success("添加成功");
       setValue("");
       setSubmitting(false);
-      let cmdList = [];
-      data.forEach((element) => {
-        cmdList.push({
-          author: "",
-          avatar:
-            "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-          content: element.content,
-          datetime: dayjs(element.updatetime).format("YYYY-MM-DD HH:mm:ss"),
-        });
-      });
-      setComments(cmdList);
+      fetchData();
     } else {
       //执行失败
       if (data.Status === 3) {
@@ -118,5 +136,3 @@ const Comment: FC<CommentWrapperProps> = ({ articleid, userId, guid }) => {
     </ContentWrapper>
   );
 };
-
-export default Comment;
