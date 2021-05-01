@@ -2,7 +2,7 @@ import dayjs from "dayjs";
 import React, { FC, useEffect, useState } from "react";
 import PAGES from "../../../router/pages";
 import { findmessage } from "../../../service/message";
-import { ContainerWrapper, ListWrapper } from "./styled";
+import { ContainerWrapper, ContentWrapper, ListWrapper } from "./styled";
 
 export const DescriptionList: FC = () => {
   const [content, setContent] = useState(null);
@@ -39,5 +39,5 @@ export const DescriptionList: FC = () => {
     };
     fetchData();
   }, []);
-  return <ContainerWrapper>{content}</ContainerWrapper>;
+  return <ContainerWrapper><ContentWrapper>{content}</ContentWrapper></ContainerWrapper>;
 };

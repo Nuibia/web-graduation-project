@@ -1,11 +1,13 @@
 import styled from "styled-components";
-export const ContainerWrapper = styled.div`
-  height: 100%;
-  overflow: auto;
+export const ContentWrapper = styled.div`
   display: flex;
+  overflow: auto;
+  height: calc(100% - 64px);
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+`;
+export const ContainerWrapper = styled.div`
+  height: 100%;
 `;
 export const ListWrapper = styled.div`
   a {
