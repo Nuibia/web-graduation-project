@@ -24,11 +24,6 @@ const UserInfo = () => {
       key: "username",
     },
     {
-      title: "密码",
-      dataIndex: "userpwd",
-      key: "userpwd",
-    },
-    {
       title: "权限",
       dataIndex: "roleid",
       key: "roleid",
@@ -105,7 +100,6 @@ const UserInfo = () => {
     const res = await editUserInfo({
       id: value.id,
       username: value.username,
-      userpwd: value.userpwd,
       usercount: value.usercount,
       roleid: value.roleid,
       guid: dataStore.guid,
@@ -145,30 +139,18 @@ const UserInfo = () => {
         cancelText="取消"
       >
         <Form form={form} onFinish={onFinish}>
-          <Form.Item
-            name="id"
-            label="账号"
-            rules={[{ required: true, message: "请输入账号!" }]}
-            hidden
-          />
+          <Form.Item name="id" label="id" hidden />
           <Form.Item
             name="usercount"
             label="账号"
             rules={[{ required: true, message: "请输入账号!" }]}
           >
-            <Input />
+            <Input  disabled/>
           </Form.Item>
           <Form.Item
             name="username"
             label="昵称"
             rules={[{ required: true, message: "请输入昵称" }]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            name="userpwd"
-            label="密码"
-            rules={[{ required: true, message: "请输入密码" }]}
           >
             <Input />
           </Form.Item>

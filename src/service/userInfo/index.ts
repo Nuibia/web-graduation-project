@@ -21,7 +21,7 @@ interface delUserInfoProps extends role {
 interface editUserInfoProps extends role {
   username: string;
   usercount: string;
-  userpwd: string;
+  userpwd?: string;
   id: number;
   guid: string;
   roleid:number;
