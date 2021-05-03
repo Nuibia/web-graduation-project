@@ -72,6 +72,7 @@ export const Comment: FC<CommentWrapperProps> = ({ articleid }) => {
   };
   useEffect(() => {
     fetchData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const dataStore = store;
   const history = useHistory();
