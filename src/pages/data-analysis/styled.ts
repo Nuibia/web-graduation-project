@@ -9,6 +9,13 @@ export const ContentWrapper = styled.div`
     width: 100%;
     overflow: auto;
   }
+  .chart .ant-empty {
+    height: 100%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
 `;
 export const PartContentWrapper = styled.div`
   background-color: #fff;

@@ -1,10 +1,12 @@
-import { Input, TimePicker } from "antd";
+import { Input, DatePicker } from "antd";
+import dayjs from "dayjs";
 import React, { useEffect, useState } from "react";
 import { getData } from "../../service/data-analysis";
 import { EnumChartType } from "../../types/data-ananysis";
 import { DataChart } from "./components/chart";
 import { ContentWrapper, FilterWRapper, PartContentWrapper } from "./styled";
 
+const { RangePicker } = DatePicker;
 const DataAnalysis = () => {
   const [countryName, setCountryName] = useState<string>("中国");
   const [chartData, setChartData] = useState([]);
@@ -15,17 +17,21 @@ const DataAnalysis = () => {
       const data = res?.data;
       let filterData = [];
       if (data) {
-          if(time.length>2){
-              const startTime = time[0].replace("-","");
-              const endTime = time[1].replace("-","");
-              (data||[]).forEach(item=>{
-                  if(startTime<item.dateId<endTime){
-                      filterData.push(item);
-                  }
-              })
-          }else{
-            filterData = data;
+        let startTime;
+        let endTime;
+        if (time.length >= 2) {
+          startTime = time[0].replaceAll("-", "");
+          endTime = time[1].replaceAll("-", "");
+        } else {
+          startTime = "20200101";
+          endTime = dayjs().format("YYYYMMDD");
+        }
+        (data || []).forEach((item) => {
+          //如果时间间隔在时间分为内添加
+          if (item.dateId >= startTime && item.dateId <= endTime) {
+            filterData.push(item);
           }
+        });
         setChartData(filterData);
       }
     };
@@ -38,20 +44,19 @@ const DataAnalysis = () => {
       setCountryName("中国");
     }
   };
-  const handleTimeChange = (time, timeString)=>{
+  const handleTimeChange = (time, timeString) => {
+    if (time) {
       setTime(timeString);
-  }
+    } else {
+      setTime([]);
+    }
+  };
   return (
     <ContentWrapper>
       <FilterWRapper>
-        <Input
-          placeholder="请输入国家名"
-          allowClear
-          onChange={handleChange}
-        />
-        <TimePicker.RangePicker
+        <Input placeholder="请输入国家名" allowClear onChange={handleChange} />
+        <RangePicker
           placeholder={["开始时间", "结束时间"]}
-          format="YYYY-MM-DD"
           allowClear
           onChange={handleTimeChange}
         />
