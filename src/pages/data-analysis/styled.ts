@@ -8,6 +8,18 @@ export const ContentWrapper = styled.div`
     height: calc(100% - 70px);
     width: 100%;
     overflow: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .chart .top {
+    width: calc(100% - 8px);
+    height: 100%;
+    display: flex;
+  }
+  .chart .bottom {
+    width: calc(100% - 8px);
+    height: 100%;
+    display: flex;
   }
   .chart .ant-empty {
     height: 100%;
@@ -18,8 +30,9 @@ export const ContentWrapper = styled.div`
   }
 `;
 export const PartContentWrapper = styled.div`
+  width: 50%;
   background-color: #fff;
-  margin: 8px 0;
+  margin: 8px 4px ;
   .title {
     font-size: 40px;
     font-weight: 800;

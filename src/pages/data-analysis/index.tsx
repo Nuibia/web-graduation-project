@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { getData } from "../../service/data-analysis";
 import { EnumChartType } from "../../types/data-ananysis";
 import { DataChart } from "./components/chart";
+import { DataInterval } from "./components/interval";
 import { ContentWrapper, FilterWRapper, PartContentWrapper } from "./styled";
 
 const { RangePicker } = DatePicker;
@@ -62,18 +63,26 @@ const DataAnalysis = () => {
         />
       </FilterWRapper>
       <div className="chart">
-        <PartContentWrapper>
-          <div className="title">{countryName}治愈人数总数趋势图</div>
-          <DataChart chartData={chartData} type={EnumChartType.治愈人数} />
-        </PartContentWrapper>
-        <PartContentWrapper>
-          <div className="title">{countryName}确诊人数总数趋势图</div>
-          <DataChart chartData={chartData} type={EnumChartType.确诊人数} />
-        </PartContentWrapper>
-        <PartContentWrapper>
-          <div className="title">{countryName}死亡人数总数趋势图</div>
-          <DataChart chartData={chartData} type={EnumChartType.死亡人数} />
-        </PartContentWrapper>
+        <div className="top">
+          <PartContentWrapper>
+            <div className="title">{countryName}治愈人数总数趋势图</div>
+            <DataChart chartData={chartData} type={EnumChartType.治愈人数} />
+          </PartContentWrapper>
+          <PartContentWrapper>
+            <div className="title">{countryName}确诊人数总数趋势图</div>
+            <DataChart chartData={chartData} type={EnumChartType.确诊人数} />
+          </PartContentWrapper>
+        </div>
+        <div className="bottom">
+          <PartContentWrapper>
+            <div className="title">{countryName}死亡人数总数趋势图</div>
+            <DataChart chartData={chartData} type={EnumChartType.死亡人数} />
+          </PartContentWrapper>
+          <PartContentWrapper>
+            <div className="title">{countryName}</div>
+            <DataInterval intervaData={chartData}/>
+          </PartContentWrapper>
+        </div>
       </div>
     </ContentWrapper>
   );

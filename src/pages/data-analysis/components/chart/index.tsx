@@ -6,7 +6,7 @@ interface DataChartProps {
   chartData: any[];
   type: EnumChartType;
 }
-const formitTime = (time)=>{
+export const formitTime = (time)=>{
   return `${time
     .toString()
     .slice(0, 4)}-${time
