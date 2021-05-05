@@ -40,8 +40,9 @@ const UserInfo = () => {
       key: "action",
       render: (text, record) => (
         <>
-          <Button onClick={() => handleEdit(record)}>编辑</Button>
-          <Button onClick={() => handleDel(record)}>删除</Button>
+          <Button type="link" onClick={() => handleEdit(record)}>编辑</Button>
+          <Button type="link" onClick={() => handleDel(record)}>删除</Button>
+          <Button type="link"  onClick={()=>handleReset(record)}>密码重置</Button>
         </>
       ),
     },
@@ -52,7 +53,6 @@ const UserInfo = () => {
     form.setFieldsValue({
       id: record.id,
       username: record.username,
-      userpwd: record.userpwd,
       usercount: record.usercount,
       roleid: record.roleid,
     });
@@ -74,6 +74,28 @@ const UserInfo = () => {
       }
     }
   };
+  const handleReset = async(record) => {
+    const res = await editUserInfo({
+      id: record.id,
+      userpwd:'aynu123456',
+      roleid: record.roleid,
+      guid: dataStore.guid,
+    });
+    const data = res?.data;
+    if (data.Status === 0) {
+      message.success("密码重置成功");
+      form.resetFields();
+      setIsModalVisible(false);
+      fetchData();
+    } else {
+      if (data.Status === 3) {
+        message.error("登陆失效，请重新登陆", 1);
+        history.push(PAGES.login);
+      } else {
+        message.error("重置失败");
+      }
+    }
+  }
   const [dataSource, setDataSource] = useState([]);
   const fetchData = async () => {
     const res = await findUserInfo({ pageNum: 1, pageSize: 100 });
