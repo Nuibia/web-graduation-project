@@ -1,7 +1,7 @@
 //页面地址
 const PAGES = {
     //信息页面 后台
-    message:'/message',
+    message:'/message/list',
     //信息展示前台展示
     messageshow:'/message/show',
     //信息添加

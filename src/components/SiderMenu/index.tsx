@@ -13,9 +13,6 @@ export const SliderMenu = () => {
       case PAGES.message:
         setSelectedKeys(MenuType.信息);
         break;
-      case PAGES.messageadd:
-        setSelectedKeys(MenuType.信息添加);
-        break;
       case PAGES.messageshow:
         setSelectedKeys(MenuType.信息展示);
         break;
@@ -28,8 +25,7 @@ export const SliderMenu = () => {
       case PAGES.bigScreen:
         setSelectedKeys(MenuType.数据大屏);
         break;
-      case PAGES.login:
-        setSelectedKeys(MenuType.数据大屏);
+      default:
         break;
     }
   }, [history, pathname]);
@@ -50,6 +46,8 @@ export const SliderMenu = () => {
         break;
       case MenuType.用户:
         history.push(PAGES.userInfo);
+        break;
+      default:
         break;
     }
   };
