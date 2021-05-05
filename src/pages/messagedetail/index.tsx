@@ -8,7 +8,6 @@ import { Comment } from "./components/comment";
 
 const MessageDetail = () => {
   const { id } = useParams<{ id }>();
-  //标题
   const [title, setTitle] = useState(undefined);
   const [content, setContent] = useState(undefined);
   const [updateTime, setUpdateTime] = useState(undefined);

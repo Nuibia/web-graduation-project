@@ -5,11 +5,19 @@ export const ContentWrapper = styled.div`
   height: calc(100% - 64px);
   flex-direction: column;
   align-items: center;
+  padding:24px;
 `;
 export const ContainerWrapper = styled.div`
+  background-image: url("../../img/VCG211320553118.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
   height: 100%;
 `;
 export const ListWrapper = styled.div`
+  width:50% !important;
+  opacity: 0.7;
+  background-color: #fff;
   a {
     width: 100%;
     height: 100%;
@@ -46,5 +54,9 @@ export const ListWrapper = styled.div`
   }
   .likecount {
     color: #b2bac2;
+  }
+  .likecount .anticon{
+    color:red !important;
+    margin-right:4px;
   }
 `;

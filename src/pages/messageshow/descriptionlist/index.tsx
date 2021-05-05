@@ -1,3 +1,4 @@
+import { HeartFilled } from "@ant-design/icons";
 import dayjs from "dayjs";
 import React, { FC, useEffect, useState } from "react";
 import PAGES from "../../../router/pages";
@@ -19,15 +20,15 @@ export const DescriptionList: FC = () => {
                 <div className="contentleft">
                   <div className="first">
                     <div className="author">
-                      作者：{element.userInfo.username}
+                      {element.userInfo.username}
                     </div>
                     <div className="time">
-                      更新时间：{dayjs(element.updatetime).format("YYYY-MM-DD HH:mm:ss")}
+                      {dayjs(element.updatetime).format("YYYY-MM-DD HH:mm:ss")}
                     </div>
                   </div>
-                  <div className="title">标题：{element.title}</div>
-                  <div className="content">内容：{element.content}</div>
-                  <div className="likecount">点赞数：{element.likecount}</div>
+                  <div className="title">{element.title}</div>
+                  <div className="content">{element.content.replace(/<[^>]+>/g, "")}</div>
+                  <div className="likecount"><HeartFilled />{element.likecount}</div>
                 </div>
                 {/* <div className="img">图片</div> */}
               </a>

@@ -31,10 +31,6 @@ export const SliderMenu = () => {
       case PAGES.login:
         setSelectedKeys(MenuType.数据大屏);
         break;
-      default:
-        setSelectedKeys(MenuType.数据大屏);
-        history.push(PAGES.bigScreen);
-        break;
     }
   }, [history, pathname]);
   const handleSelect = (e: any) => {
@@ -54,8 +50,6 @@ export const SliderMenu = () => {
         break;
       case MenuType.用户:
         history.push(PAGES.userInfo);
-        break;
-      default:
         break;
     }
   };

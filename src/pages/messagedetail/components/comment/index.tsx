@@ -18,15 +18,16 @@ import {
   findcomment,
 } from "../../../../service/comment";
 import store from "../../../../store";
-import { ContentWrapper } from "./styled";
+import { ContentWrapper, ListWrapper } from "./styled";
 
 const CommentList = ({ comments }) => (
-  <List
-    dataSource={comments}
-    header={`${comments.length} ${comments.length > 1 ? "replies" : "reply"}`}
-    itemLayout="horizontal"
-    renderItem={(props: CommentProps) => <AntdComment {...props} />}
-  />
+  <ListWrapper>
+    <List
+      dataSource={comments}
+      itemLayout="horizontal"
+      renderItem={(props: CommentProps) => <AntdComment {...props} />}
+    />
+  </ListWrapper>
 );
 const Editor = ({ onChange, onSubmit, submitting, value }) => (
   <>
@@ -49,6 +50,7 @@ interface CommentWrapperProps {
   articleid?: number;
 }
 export const Comment: FC<CommentWrapperProps> = ({ articleid }) => {
+  const DataStore = store;
   const fetchData = async () => {
     const res = await findcomment({
       pageNum: 1,
@@ -60,7 +62,7 @@ export const Comment: FC<CommentWrapperProps> = ({ articleid }) => {
       let cmdList = [];
       (data?.Data || []).forEach((element) => {
         cmdList.push({
-          author: "",
+          author: DataStore.userName,
           avatar:
             "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
           content: element.content,
@@ -72,7 +74,7 @@ export const Comment: FC<CommentWrapperProps> = ({ articleid }) => {
   };
   useEffect(() => {
     fetchData();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const dataStore = store;
   const history = useHistory();
