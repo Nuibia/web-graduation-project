@@ -6,7 +6,7 @@ import { MenuType } from "../../types/SiderMenu.ts";
 
 export const SliderMenu = () => {
   const history = useHistory();
-  const [selectedKeys, setSelectedKeys] = useState(MenuType.信息);
+  const [selectedKeys, setSelectedKeys] = useState<MenuType>();
   let pathname = window.location.pathname;
   useEffect(() => {
     switch (pathname) {
@@ -28,11 +28,12 @@ export const SliderMenu = () => {
       case PAGES.bigScreen:
         setSelectedKeys(MenuType.数据大屏);
         break;
-
       default:
+        setSelectedKeys(MenuType.数据大屏);
+        history.push(PAGES.bigScreen);
         break;
     }
-  }, [pathname]);
+  }, [history, pathname]);
   const handleSelect = (e: any) => {
     setSelectedKeys(e.key);
     switch (e.key) {
@@ -50,6 +51,9 @@ export const SliderMenu = () => {
         break;
       case MenuType.用户:
         history.push(PAGES.userInfo);
+        break;
+      default:
+        history.push(PAGES.bigScreen);
         break;
     }
   };
