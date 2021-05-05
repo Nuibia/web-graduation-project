@@ -26,9 +26,17 @@ interface editUserInfoProps extends role {
   guid: string;
   roleid:number;
 }
+interface addUserInfoProps extends role {
+  username: string;
+  usercount: string;
+  userpwd: string;
+  roleid:number;
+}
 export const findUserInfo = async (params: findUserInfoProps) =>
   axios.get(`${BASE_URL}api/UserInfo/GetUserInfo`, { params });
 export const delUserInfo = async (params: delUserInfoProps) =>
   axios.post(`${BASE_URL}api/UserInfo/DelUserInfo`, params);
 export const editUserInfo = async (params: editUserInfoProps) =>
   axios.post(`${BASE_URL}api/UserInfo/UpdateUserInfo`, params);
+export const addUserInfo = async (params: addUserInfoProps) =>
+  axios.post(`${BASE_URL}api/UserInfo/AddUserInfo`, params);

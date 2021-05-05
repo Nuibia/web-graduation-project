@@ -1,14 +1,21 @@
 import { Button, Form, Input, message } from "antd";
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { login } from "../../service/login";
-import { BottonWrapper, FormContainerWrapper, FormWrapper, SpanWrapper } from "./style";
+import {
+  BottonWrapper,
+  FormContainerWrapper,
+  FormWrapper,
+  SpanWrapper,
+} from "./style";
 import { CommonLayout } from "../../components/CommonLayout";
 import Store from "../../store";
 import PAGES from "../../router/pages";
 import { useHistory } from "react-router";
+import { RegisterModal } from "./components/register-modal";
 
 const Login: FC = () => {
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const dataStore = Store;
   const history = useHistory();
   const onFinish = async (value: any) => {
@@ -21,6 +28,7 @@ const Login: FC = () => {
       message.error("登陆失败");
     }
   };
+
   return (
     <CommonLayout isShowHeader={false}>
       <FormContainerWrapper>
@@ -50,13 +58,18 @@ const Login: FC = () => {
               <Button type="primary" htmlType="submit">
                 登陆
               </Button>
-              <Button type="primary" danger>
+              <Button
+                type="primary"
+                danger
+                onClick={() => setIsModalVisible(true)}
+              >
                 注册
               </Button>
             </BottonWrapper>
           </Form.Item>
         </FormWrapper>
       </FormContainerWrapper>
+      <RegisterModal isModalVisible={isModalVisible} modalhandleCancel={(status)=>setIsModalVisible(status)}/>
     </CommonLayout>
   );
 };
