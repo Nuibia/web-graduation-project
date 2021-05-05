@@ -40,14 +40,24 @@ const UserInfo = () => {
       key: "action",
       render: (text, record) => (
         <>
-          <Button type="link" onClick={() => handleEdit(record)}>编辑</Button>
-          <Button type="link" onClick={() => handleDel(record)}>删除</Button>
-          <Button type="link"  onClick={()=>handleReset(record)}>密码重置</Button>
+          <Button type="link" onClick={() => handleEdit(record)}>
+            编辑
+          </Button>
+          <Button type="link" onClick={() => handleDel(record)}>
+            删除
+          </Button>
+          <Button type="link" onClick={() => handleReset(record)}>
+            密码重置
+          </Button>
+          <Button type="link" onClick={() => handleEditPwd(record)}>
+            密码修改
+          </Button>
         </>
       ),
     },
   ];
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isPwdModalVisible, setIsPwdModalVisible] = useState(false);
   const dataStore = store;
   const handleEdit = async (record) => {
     form.setFieldsValue({
@@ -57,6 +67,13 @@ const UserInfo = () => {
       roleid: record.roleid,
     });
     setIsModalVisible(true);
+  };
+  const handleEditPwd = async (record) => {
+    form.setFieldsValue({
+      id: record.id,
+      roleid: record.roleid,
+    });
+    setIsPwdModalVisible(true);
   };
   const history = useHistory();
   const handleDel = async (record) => {
@@ -74,10 +91,10 @@ const UserInfo = () => {
       }
     }
   };
-  const handleReset = async(record) => {
+  const handleReset = async (record) => {
     const res = await editUserInfo({
       id: record.id,
-      userpwd:'aynu123456',
+      userpwd: "aynu123456",
       roleid: record.roleid,
       guid: dataStore.guid,
     });
@@ -95,7 +112,7 @@ const UserInfo = () => {
         message.error("重置失败");
       }
     }
-  }
+  };
   const [dataSource, setDataSource] = useState([]);
   const fetchData = async () => {
     const res = await findUserInfo({ pageNum: 1, pageSize: 100 });
@@ -141,13 +158,53 @@ const UserInfo = () => {
       }
     }
   };
+  const onPwdFinish = async (record) => {
+    const userRes = await findUserInfo({
+      pageNum: 1,
+      pageSize: 999,
+      usercount: record.count,
+    });
+    const userData = userRes?.data?.Data;
+    if (record.userpwd === userData[0].userpwd) {
+      const res = await editUserInfo({
+        id: record.id,
+        userpwd: record.newuserpwd,
+        roleid: record.roleid,
+        guid: dataStore.guid,
+      });
+      const data = res?.data;
+      if (data.Status === 0) {
+        message.success("密码修改成功");
+        form.resetFields();
+        setIsPwdModalVisible(false);
+        fetchData();
+      } else {
+        if (data.Status === 3) {
+          message.error("登陆失效，请重新登陆", 1);
+          history.push(PAGES.login);
+        } else {
+          message.error("修改失败");
+        }
+      }
+    } else {
+      message.error("旧密码有误");
+    }
+  };
+
   const handleOk = () => {
+    form.submit();
+  };
+  const handlePwdOk = () => {
     form.submit();
   };
 
   const handleCancel = () => {
     form.resetFields();
     setIsModalVisible(false);
+  };
+  const handlePwdCancel = () => {
+    form.resetFields();
+    setIsPwdModalVisible(false);
   };
   return (
     <CommonLayout>
@@ -167,7 +224,7 @@ const UserInfo = () => {
             label="账号"
             rules={[{ required: true, message: "请输入账号!" }]}
           >
-            <Input  disabled/>
+            <Input disabled />
           </Form.Item>
           <Form.Item
             name="username"
@@ -185,6 +242,33 @@ const UserInfo = () => {
               <Option value={UserInfoRole.管理员}>管理员</Option>
               <Option value={UserInfoRole.普通}>普通用户</Option>
             </Select>
+          </Form.Item>
+        </Form>
+      </Modal>
+      <Modal
+        title="密码修改"
+        visible={isPwdModalVisible}
+        onOk={handlePwdOk}
+        onCancel={handlePwdCancel}
+        okText="确认"
+        cancelText="取消"
+      >
+        <Form form={form} onFinish={onPwdFinish}>
+          <Form.Item name="id" label="id" hidden />
+          <Form.Item name="roleid" label="roleid" hidden />
+          <Form.Item
+            name="userpwd"
+            label="旧密码"
+            rules={[{ required: true, message: "请输入旧账号!" }]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            name="newuserpwd"
+            label="新密码"
+            rules={[{ required: true, message: "请输入新昵称" }]}
+          >
+            <Input />
           </Form.Item>
         </Form>
       </Modal>

@@ -72,12 +72,15 @@ const Message = () => {
       render: (text, record) => (
         <>
           <Button
+            type="link"
             style={{ marginRight: "8px" }}
             onClick={() => handleEdit(record)}
           >
             编辑
           </Button>
-          <Button onClick={() => handleDel(record)}>删除</Button>
+          <Button type="link" onClick={() => handleDel(record)}>
+            删除
+          </Button>
         </>
       ),
     },
