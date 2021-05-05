@@ -23,8 +23,8 @@ const Login: FC = () => {
   };
   return (
     <CommonLayout isShowHeader={false}>
-      <SpanWrapper>疫情数据后台管理系统登陆</SpanWrapper>
       <FormContainerWrapper>
+      <SpanWrapper>疫情数据后台管理系统登陆</SpanWrapper>
         <FormWrapper name="normal_login" onFinish={onFinish}>
           <Form.Item
             name="usercount"

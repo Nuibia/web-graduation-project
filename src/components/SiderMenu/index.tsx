@@ -28,6 +28,9 @@ export const SliderMenu = () => {
       case PAGES.bigScreen:
         setSelectedKeys(MenuType.数据大屏);
         break;
+      case PAGES.login:
+        setSelectedKeys(MenuType.数据大屏);
+        break;
       default:
         setSelectedKeys(MenuType.数据大屏);
         history.push(PAGES.bigScreen);
@@ -53,7 +56,6 @@ export const SliderMenu = () => {
         history.push(PAGES.userInfo);
         break;
       default:
-        history.push(PAGES.bigScreen);
         break;
     }
   };
