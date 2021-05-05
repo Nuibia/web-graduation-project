@@ -24,3 +24,7 @@ export const SpanWrapper = styled.span`
   font-size: 40px;
   margin-bottom: 100px;
 `;
+export const BottonWrapper = styled.div`
+  display:flex;
+  justify-content:space-between;
+`;
