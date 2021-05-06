@@ -15,20 +15,13 @@ import PAGES from "../../../../router/pages";
 import {
   commentadd,
   commentaddProps,
+  commentdel,
   findcomment,
 } from "../../../../service/comment";
 import store from "../../../../store";
-import { ContentWrapper, ListWrapper } from "./styled";
+import { CommentWrapper, ContentWrapper, ListWrapper } from "./styled";
 
-const CommentList = ({ comments }) => (
-  <ListWrapper>
-    <List
-      dataSource={comments}
-      itemLayout="horizontal"
-      renderItem={(props: CommentProps) => <AntdComment {...props} />}
-    />
-  </ListWrapper>
-);
+
 const Editor = ({ onChange, onSubmit, submitting, value }) => (
   <>
     <Form.Item>
@@ -50,6 +43,33 @@ interface CommentWrapperProps {
   articleid?: number;
 }
 export const Comment: FC<CommentWrapperProps> = ({ articleid }) => {
+  const handleDel =async (e)=>{
+    const res =await commentdel({id:e.id, guid:DataStore.guid});
+    if(res?.data?.Status === 0){
+      message.success('删除成功');
+      fetchData();
+    }else{
+      if(res?.data?.Status === 3){
+        message.error('登陆超时，请重新登陆');
+        history.push(PAGES.login);
+      }
+      message.error('删除失败');
+    }
+  }
+  const CommentList = ({ comments }) => (
+    <ListWrapper>
+      <List
+        dataSource={comments}
+        itemLayout="horizontal"
+        renderItem={(props: CommentProps) => (
+          <CommentWrapper>
+            <AntdComment {...props} />
+            <Button type="link" onClick={()=>handleDel(props)}>删除</Button>
+          </CommentWrapper>
+        )}
+      />
+    </ListWrapper>
+  );
   const DataStore = store;
   const fetchData = async () => {
     const res = await findcomment({
@@ -62,6 +82,7 @@ export const Comment: FC<CommentWrapperProps> = ({ articleid }) => {
       let cmdList = [];
       (data?.Data || []).forEach((element) => {
         cmdList.push({
+          id:element.id,
           author: DataStore.userName,
           avatar:
             "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
