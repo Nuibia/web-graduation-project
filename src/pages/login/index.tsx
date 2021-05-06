@@ -13,6 +13,7 @@ import Store from "../../store";
 import PAGES from "../../router/pages";
 import { useHistory } from "react-router";
 import { RegisterModal } from "./components/register-modal";
+import {  USER_COUNT_ROLES, USER_PWD_ROLES } from "../../constant";
 
 const Login: FC = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -36,7 +37,7 @@ const Login: FC = () => {
         <FormWrapper name="normal_login" onFinish={onFinish}>
           <Form.Item
             name="usercount"
-            rules={[{ required: true, message: "账号不能为空!" }]}
+            rules={USER_COUNT_ROLES}
           >
             <Input
               placeholder="请输入账号"
@@ -45,7 +46,7 @@ const Login: FC = () => {
           </Form.Item>
           <Form.Item
             name="userpwd"
-            rules={[{ required: true, message: "密码不能为空!" }]}
+            rules={USER_PWD_ROLES}
           >
             <Input
               type="password"

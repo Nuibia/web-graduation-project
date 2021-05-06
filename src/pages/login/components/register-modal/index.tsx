@@ -1,5 +1,6 @@
 import { Form, Input, message, Modal } from 'antd'
 import React, { FC } from 'react'
+import { USER_COUNT_ROLES, USER_NAME_ROLES, USER_PWD_ROLES } from '../../../../constant';
 import { addUserInfo } from '../../../../service/userInfo';
 
 interface RegisterModalProps {
@@ -42,21 +43,21 @@ export const RegisterModal:FC<RegisterModalProps> = ({isModalVisible, modalhandl
           <Form.Item
             name="usercount"
             label="账号"
-            rules={[{ required: true, message: "请输入账号!" }]}
+            rules={USER_COUNT_ROLES}
           >
             <Input />
           </Form.Item>
           <Form.Item
             name="userpwd"
             label="密码"
-            rules={[{ required: true, message: "请输入密码" }]}
+            rules={USER_PWD_ROLES}
           >
             <Input />
           </Form.Item>
           <Form.Item
             name="username"
             label="昵称"
-            rules={[{ required: true, message: "请输入昵称" }]}
+            rules={USER_NAME_ROLES}
           >
             <Input />
           </Form.Item>

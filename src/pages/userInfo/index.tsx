@@ -2,6 +2,7 @@ import { Button, Form, Input, message, Modal, Select, Table } from "antd";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { CommonLayout } from "../../components/CommonLayout";
+import { USER_COUNT_ROLES, USER_NAME_ROLES, USER_PWD_ROLES } from "../../constant";
 import PAGES from "../../router/pages";
 import {
   delUserInfo,
@@ -232,14 +233,14 @@ const UserInfo = () => {
           <Form.Item
             name="usercount"
             label="账号"
-            rules={[{ required: true, message: "请输入账号!" }]}
+            rules={USER_COUNT_ROLES}
           >
             <Input disabled />
           </Form.Item>
           <Form.Item
             name="username"
             label="昵称"
-            rules={[{ required: true, message: "请输入昵称" }]}
+            rules={USER_NAME_ROLES}
           >
             <Input />
           </Form.Item>
@@ -269,14 +270,14 @@ const UserInfo = () => {
           <Form.Item
             name="userpwd"
             label="旧密码"
-            rules={[{ required: true, message: "请输入旧账号!" }]}
+            rules={USER_PWD_ROLES}
           >
             <Input />
           </Form.Item>
           <Form.Item
             name="newuserpwd"
             label="新密码"
-            rules={[{ required: true, message: "请输入新昵称" }]}
+            rules={USER_PWD_ROLES}
           >
             <Input />
           </Form.Item>
