@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { HeaderWrapper } from "./styled";
+import { ExtraWrapper, HeaderWrapper } from "./styled";
 import store from "../../store";
 import { useHistory } from "react-router";
 import PAGES from "../../router/pages";
@@ -21,12 +21,19 @@ export const CommonLayout: FC<CommonLayoutProps> = ({
   return (
     <>
       {isShowHeader && (
-        <HeaderWrapper>
-          <div className="exit" onClick={handleExit}>
-            退出登录
-          </div>
-          <div className="userInfo">欢迎您：{DataStore.userName}</div>
-        </HeaderWrapper>
+        <HeaderWrapper
+          ghost={false}
+          onBack={() => window.history.back()}
+          title="返回上一步"
+          extra={[
+            <ExtraWrapper>
+              <div className="userInfo">欢迎您：{DataStore.userName}</div>
+              <div className="exit" onClick={handleExit}>
+                退出登录
+              </div>
+            </ExtraWrapper>,
+          ]}
+        ></HeaderWrapper>
       )}
       {children}
     </>

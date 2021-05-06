@@ -1,18 +1,24 @@
-import { Header } from "antd/lib/layout/layout";
+import { PageHeader } from "antd";
 import styled from "styled-components";
 
-export const HeaderWrapper = styled(Header)`
+export const HeaderWrapper = styled(PageHeader)`
+  background: #001529;
+  color:#fff;
+  .ant-page-header-back-button{
+    color:#fff !important;
+  }
+  .ant-page-header-heading-title{
+    color:#fff !important;
+  }
+`;
+export const ExtraWrapper = styled.div`
   display: flex;
-  flex-direction:row-reverse;
-  .userInfo {
-    color: #fff;
-  }
+  font-weight: 800;
   .exit {
-    margin-left: 100px;
+    margin-left: 16px;
     cursor: pointer;
-    color: #fff;
   }
-  .exit:hover{
-    color:#c1c2c3;
+  .exit:hover {
+    color: #c1c2c3;
   }
 `;
