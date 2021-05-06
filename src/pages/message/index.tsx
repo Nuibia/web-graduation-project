@@ -12,13 +12,14 @@ const Message = () => {
   const history = useHistory();
   const [dataSource, setDataSource] = useState([]);
   const fetchData = async () => {
-    const res = await findmessage({ pageSize: 10, pageNum: 1 });
+    const res = await findmessage({ pageSize: 10, pageNum: 1, authorid:dataStore.userId, roleid:dataStore.roleId });
     if (res) {
       setDataSource(res.data.Data);
     }
   };
   useEffect(() => {
     fetchData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const handleEdit = (record) => {
     history.push(`${PAGES.messageedit}/${record.id}`);

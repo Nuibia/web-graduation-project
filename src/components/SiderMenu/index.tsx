@@ -2,9 +2,11 @@ import { Menu } from "antd";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import PAGES from "../../router/pages";
+import store from "../../store";
 import { MenuType } from "../../types/SiderMenu.ts";
 
 export const SliderMenu = () => {
+  const DataStore = store;
   const history = useHistory();
   const [selectedKeys, setSelectedKeys] = useState<MenuType>();
   let pathname = window.location.pathname;
@@ -58,9 +60,13 @@ export const SliderMenu = () => {
       selectedKeys={[(selectedKeys as unknown) as string]}
       onSelect={handleSelect}
     >
-      <Menu.Item key={MenuType.信息}>信息操作</Menu.Item>
+      {DataStore.guid && (
+        <>
+          <Menu.Item key={MenuType.信息}>信息操作</Menu.Item>
+          <Menu.Item key={MenuType.用户}>用户操作</Menu.Item>
+        </>
+      )}
       <Menu.Item key={MenuType.信息展示}>信息展示</Menu.Item>
-      <Menu.Item key={MenuType.用户}>用户操作</Menu.Item>
       <Menu.Item key={MenuType.数据大屏}>数据大屏</Menu.Item>
       <Menu.Item key={MenuType.数据分析}>数据分析</Menu.Item>
     </Menu>

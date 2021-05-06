@@ -5,6 +5,7 @@ interface userInfoProps {
   userCount?: string;
   userName?: string;
   userId?: number;
+  roleId?:boolean;
 }
 class Store {
   //登陆验证
@@ -18,6 +19,8 @@ class Store {
   //id值
   @observable userId =
     JSON.parse(localStorage.getItem("UserInfo"))?.userId || 0;
+  @observable roleId =
+    JSON.parse(localStorage.getItem("UserInfo"))?.roleId || undefined;
 
   @action.bound
   setUserInfo(info: userInfoProps) {
@@ -35,6 +38,7 @@ class Store {
         if (data) {
           this.userId = data[0].id;
           this.userName = data[0].username;
+          this.roleId = data[0].roleid;
           localStorage.setItem(
             "UserInfo",
             JSON.stringify({
@@ -42,6 +46,7 @@ class Store {
               userCount: this.userCount,
               userName: this.userName,
               userId: this.userId,
+              roleId:this.roleId,
             })
           );
         }
@@ -53,6 +58,9 @@ class Store {
     if (info.userName) {
       this.userName = info.userName;
     }
+    if (info.roleId) {
+      this.roleId = info.roleId;
+    }
     localStorage.setItem(
       "UserInfo",
       JSON.stringify({
@@ -60,6 +68,7 @@ class Store {
         userCount: this.userCount,
         userName: this.userName,
         userId: this.userId,
+        roleId:this.roleId,
       })
     );
   }

@@ -43,12 +43,16 @@ const UserInfo = () => {
           <Button type="link" onClick={() => handleEdit(record)}>
             编辑
           </Button>
-          <Button type="link" onClick={() => handleDel(record)}>
-            删除
-          </Button>
-          <Button type="link" onClick={() => handleReset(record)}>
-            密码重置
-          </Button>
+          {dataStore.roleId === UserInfoRole.管理员 && (
+            <>
+              <Button type="link" onClick={() => handleDel(record)}>
+                删除
+              </Button>
+              <Button type="link" onClick={() => handleReset(record)}>
+                密码重置
+              </Button>
+            </>
+          )}
           <Button type="link" onClick={() => handleEditPwd(record)}>
             密码修改
           </Button>
@@ -115,7 +119,12 @@ const UserInfo = () => {
   };
   const [dataSource, setDataSource] = useState([]);
   const fetchData = async () => {
-    const res = await findUserInfo({ pageNum: 1, pageSize: 100 });
+    const res = await findUserInfo({
+      pageNum: 1,
+      pageSize: 100,
+      usercount: dataStore.userCount,
+      roleid: dataStore.roleId,
+    });
     const data = res?.data?.Data;
     if (data) {
       let list = [];
@@ -133,6 +142,7 @@ const UserInfo = () => {
   };
   useEffect(() => {
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const [form] = Form.useForm();
   const onFinish = async (value) => {

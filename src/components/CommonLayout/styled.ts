@@ -14,8 +14,11 @@ export const HeaderWrapper = styled(PageHeader)`
 export const ExtraWrapper = styled.div`
   display: flex;
   font-weight: 800;
-  .exit {
-    margin-left: 16px;
+  align-items:center;
+  .desc {
+    margin-right: 16px;
+  }
+  .exit {   
     cursor: pointer;
   }
   .exit:hover {

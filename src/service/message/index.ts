@@ -20,6 +20,7 @@ interface findmessageRequest {
   pageNum: number;
   authorid?: number;
   id?: number;
+  roleid?:number;
 }
 interface delmessageRequest {
   id: number;
