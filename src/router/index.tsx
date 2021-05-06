@@ -1,20 +1,30 @@
-import React, { FC, Suspense } from "react";
+import React, { FC, Suspense, useEffect, useState } from "react";
 import { Route, Router, Switch } from "react-router-dom";
 import { SiderContainer } from "../App";
 import { LayoutContainer } from "../components/antd-override";
 import { SliderMenu } from "../components/SiderMenu";
 import { history } from "./history";
+import PAGES from "./pages";
 import adminRouter from "./router-config";
 
 const Routers: FC = () => {
+  const [pathName, setPathName] = useState(undefined);
+  useEffect(() => {
+    setPathName(window.location.pathname);
+  }, []);
+  history.listen((location) => {
+    setPathName(location.pathname);
+  });
   return (
     <Router history={history}>
       <LayoutContainer>
+        {pathName !== PAGES.login && (
           <SiderContainer>
             <div className="logo" />
             <SliderMenu />
           </SiderContainer>
-        <LayoutContainer isShowSider={true}>
+        )}
+        <LayoutContainer isShowSider={pathName !== PAGES.login}>
           <Suspense fallback={<div />}>
             <Switch>
               {adminRouter.map((item) => (
