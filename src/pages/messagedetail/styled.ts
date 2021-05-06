@@ -35,6 +35,18 @@ export const ArticleWrapper = styled.div`
   .likecount {
     margin-bottom: 24px;
   }
+  .likecount .icon {
+    font-size:16px;
+    color:red;
+    margin-right:4px;
+    cursor: pointer;
+  }
+  .content{
+      width:100%;
+      height:100%;
+      padding:8px;
+      margin-top:4px;
+    }
 `;
 export const CommentWrapper = styled.div`
   opacity: 0.9;

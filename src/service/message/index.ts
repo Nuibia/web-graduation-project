@@ -5,11 +5,11 @@ axios.interceptors.request.use(config => {
   return config;
 });
 export interface messageAddRequest {
-  title: string;
-  content: string;
-  updatetime: string;
-  likecount: number;
-  authorid: number;
+  title?: string;
+  content?: string;
+  updatetime?: string;
+  likecount?: number;
+  authorid?: number;
   guid: string;
 }
 export interface editMessageRequest extends messageAddRequest{
