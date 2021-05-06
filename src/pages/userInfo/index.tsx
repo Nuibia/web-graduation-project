@@ -248,7 +248,7 @@ const UserInfo = () => {
             label="权限"
             rules={[{ required: true, message: "请选择权限" }]}
           >
-            <Select>
+            <Select disabled={(dataStore.roleId === UserInfoRole.普通)}>
               <Option value={UserInfoRole.管理员}>管理员</Option>
               <Option value={UserInfoRole.普通}>普通用户</Option>
             </Select>
