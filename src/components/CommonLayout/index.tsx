@@ -17,6 +17,8 @@ export const CommonLayout: FC<CommonLayoutProps> = ({
   const DataStore = store;
   const history = useHistory();
   const handleExit = () => {
+    localStorage.removeItem('UserInfo')
+    DataStore.clearData();
     history.push(PAGES.login);
   };
   return (

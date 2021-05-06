@@ -5,7 +5,7 @@ interface userInfoProps {
   userCount?: string;
   userName?: string;
   userId?: number;
-  roleId?:boolean;
+  roleId?: boolean;
 }
 class Store {
   //登陆验证
@@ -46,7 +46,7 @@ class Store {
               userCount: this.userCount,
               userName: this.userName,
               userId: this.userId,
-              roleId:this.roleId,
+              roleId: this.roleId,
             })
           );
         }
@@ -68,9 +68,18 @@ class Store {
         userCount: this.userCount,
         userName: this.userName,
         userId: this.userId,
-        roleId:this.roleId,
+        roleId: this.roleId,
       })
     );
+  }
+  @action.bound
+    //退出登陆时，重置
+  clearData() {
+    this.guid = "";
+    this.userCount = "";
+    this.userName = "";
+    this.userId = 0;
+    this.roleId = undefined;
   }
 }
 export default new Store();
