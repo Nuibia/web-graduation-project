@@ -9,9 +9,15 @@ export const SliderMenu = () => {
   const DataStore = store;
   const history = useHistory();
   const [selectedKeys, setSelectedKeys] = useState<MenuType>();
-  let pathname = window.location.pathname;
+  const [pathName, setPathName] = useState(undefined);
   useEffect(() => {
-    switch (pathname) {
+    setPathName(window.location.pathname);
+  }, []);
+  history.listen((location) => {
+    setPathName(location.pathname);
+  });
+  useEffect(() => {
+    switch (pathName) {
       case PAGES.message:
         setSelectedKeys(MenuType.信息);
         break;
@@ -30,7 +36,7 @@ export const SliderMenu = () => {
       default:
         break;
     }
-  }, [history, pathname]);
+  }, [history, pathName]);
   const handleSelect = (e: any) => {
     setSelectedKeys(e.key);
     switch (e.key) {
