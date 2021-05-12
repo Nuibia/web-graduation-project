@@ -5,7 +5,7 @@ export const ContentWrapper = styled.div`
   height: calc(100% - 64px);
   flex-direction: column;
   align-items: center;
-  padding:24px;
+  padding: 24px;
 `;
 export const ContainerWrapper = styled.div`
   background-image: url("../../img/VCG211320553118.jpg");
@@ -15,7 +15,7 @@ export const ContainerWrapper = styled.div`
   height: 100%;
 `;
 export const ListWrapper = styled.div`
-  width:50% !important;
+  width: 50% !important;
   opacity: 0.7;
   background-color: #fff;
   a {
@@ -51,12 +51,17 @@ export const ListWrapper = styled.div`
     color: #b2bac2;
     font-size: 16px;
     font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
   }
   .likecount {
     color: #b2bac2;
   }
-  .likecount .anticon{
-    color:red !important;
-    margin-right:4px;
+  .likecount .anticon {
+    color: red !important;
+    margin-right: 4px;
   }
 `;

@@ -19,7 +19,6 @@ export const ArticleWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   width: 780px;
-  min-height: 800px;
   .title {
     font-size: 40px;
     font-weight: 800;
