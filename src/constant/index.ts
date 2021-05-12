@@ -1,4 +1,4 @@
-export const BASE_URL = "https://localhost:44303/";
+export const BASE_URL = "http://www.barteam.cn:5555/";
 export const USER_COUNT_ROLES = [
   {
     required: true,
